@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Calculadora</title>
+    <style>
+
+        body {
+            
+            background-image: url(fondo.png);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .pantalla {
+            padding: 15px 0px;
+            width: 100%;
+            text-align: right;
+            border: 1px solid gray;
+            overflow-x: auto;
+            background-color: rgb(177, 171, 171);
+           
+
+        }
+        .contenido{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:100vh;
+            padding:15px;
+            
+        }
+        .botones { 
+            background-color: #999;
+            display: grid;
+            grid-gap: 1px;
+            grid-template-columns: repeat(4, 1fr);
+        
+        }
+        .botones > * {
+            padding: 0.5em 1.25em;
+            position: relative;
+            text-align: center;
+            }
+        .boton:hover{
+            filter:brightness(80%);
+            transition: filter .25s;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="contenido">
+        <div class="calculadora">
+            <div class="pantalla">0</div>
+            <div class="botones">
+                <button class="boton">7</button>
+                <button class="boton">8</button>
+                <button class="boton">9</button>
+                <button class="boton">/</button>
+                <button class="boton" >4</button>
+                <button class="boton">5</button>
+                <button class="boton">6</button>
+                <button class="boton" >*</button>
+                <button class="boton">1</button>
+                <button class="boton">2</button>
+                <button class="boton">3</button>
+                <button class="boton">-</button>
+                
+                <button class="boton">0</button>
+                <button class="boton">C</button>
+                <button class="boton">=</button>
+                <button class="boton">+</button>
+            </div>
+        </div>
+      </div>
+      <script>
+        window.addEventListener('load',()=>{
+            const display=document.querySelector('.pantalla');
+            const teclado=document.getElementsByClassName('boton');
+            const arregloTeclado=Array.from(teclado);
+            
+
+            arregloTeclado.forEach((button)=>{
+                button.addEventListener('click',()=>{
+                    console.log(arregloTeclado);
+                    console.log(button.innerHTML);
+                    calculadora(button,display);
+     
+                })
+            })
+            
+        });
+        function calculadora(button,display){
+            switch(button.innerHTML){
+                case 'C':
+                    borrar(display);
+                    break;
+                case '=':
+                    calcular(display);
+                    break;
+                default:
+                    actualizar(display,button);
+                    break;
+            }
+
+        }
+        function calcular(display){
+            display.innerHTML=eval(display.innerHTML);
+
+        }
+        function actualizar(display,button){
+            if(display.innerHTML==0){
+                display.innerHTML='';
+    
+            }
+            display.innerHTML += button.innerHTML;
+        }
+        function borrar(display){
+            display.innerHTML=0;
+        }
+      </script>
+</body>
+</html>
